@@ -1,0 +1,29 @@
+{
+  "schema_id": "domainrecon.takeover_signatures",
+  "schema_version": 1,
+  "source": "DomainRecon bundled signature set. Curated from publicly documented provider behaviour and community fingerprint lists; each entry is marked unverified until independently validated by the operator.",
+  "providers": [
+    {"id": "github_pages", "provider": "GitHub Pages", "cname_suffixes": ["github.io"], "claimable_when_dangling": false, "verification_status": "unverified",
+     "evidence_rules": [{"type": "http_text_contains", "value": "there isn't a github pages site here", "signal": "unclaimed_resource"}, {"type": "http_text_contains", "value": "site not found · github pages", "signal": "unclaimed_resource"}]},
+    {"id": "heroku", "provider": "Heroku", "cname_suffixes": ["herokuapp.com", "herokudns.com", "herokussl.com"], "claimable_when_dangling": false, "verification_status": "unverified",
+     "evidence_rules": [{"type": "http_text_contains", "value": "no such app", "signal": "unclaimed_resource"}]},
+    {"id": "aws_s3", "provider": "Amazon S3", "cname_suffixes": ["s3.amazonaws.com"], "cname_contains": ["s3-website.", "s3-website-"], "claimable_when_dangling": false, "verification_status": "unverified",
+     "evidence_rules": [{"type": "http_text_contains", "value": "nosuchbucket", "signal": "unclaimed_resource"}, {"type": "http_text_contains", "value": "the specified bucket does not exist", "signal": "unclaimed_resource"}]},
+    {"id": "aws_elastic_beanstalk", "provider": "AWS Elastic Beanstalk", "cname_suffixes": ["elasticbeanstalk.com"], "claimable_when_dangling": true, "verification_status": "unverified", "evidence_rules": []},
+    {"id": "azure", "provider": "Microsoft Azure", "cname_suffixes": ["azurewebsites.net", "cloudapp.net", "cloudapp.azure.com", "trafficmanager.net", "blob.core.windows.net", "azureedge.net", "azure-api.net", "azurefd.net", "azurestaticapps.net"], "claimable_when_dangling": true, "verification_status": "unverified", "evidence_rules": []},
+    {"id": "gcs", "provider": "Google Cloud Storage", "cname_suffixes": ["storage.googleapis.com"], "claimable_when_dangling": false, "verification_status": "unverified",
+     "evidence_rules": [{"type": "http_text_contains", "value": "nosuchbucket", "signal": "unclaimed_resource"}, {"type": "http_text_contains", "value": "the specified bucket does not exist", "signal": "unclaimed_resource"}]},
+    {"id": "shopify", "provider": "Shopify", "cname_suffixes": ["myshopify.com"], "claimable_when_dangling": false, "verification_status": "unverified",
+     "evidence_rules": [{"type": "http_text_contains", "value": "sorry, this shop is currently unavailable", "signal": "unclaimed_resource"}]},
+    {"id": "fastly", "provider": "Fastly", "cname_suffixes": ["fastly.net"], "claimable_when_dangling": false, "verification_status": "unverified",
+     "evidence_rules": [{"type": "http_text_contains", "value": "fastly error: unknown domain", "signal": "unclaimed_resource"}]},
+    {"id": "bitbucket", "provider": "Bitbucket", "cname_suffixes": ["bitbucket.io"], "claimable_when_dangling": false, "verification_status": "unverified",
+     "evidence_rules": [{"type": "http_text_contains", "value": "repository not found", "signal": "unclaimed_resource"}]},
+    {"id": "zendesk", "provider": "Zendesk", "cname_suffixes": ["zendesk.com"], "claimable_when_dangling": false, "verification_status": "unverified",
+     "evidence_rules": [{"type": "http_text_contains", "value": "help center closed", "signal": "unclaimed_resource"}]},
+    {"id": "surge", "provider": "Surge.sh", "cname_suffixes": ["surge.sh"], "claimable_when_dangling": false, "verification_status": "unverified",
+     "evidence_rules": [{"type": "http_text_contains", "value": "project not found", "signal": "unclaimed_resource"}]},
+    {"id": "netlify", "provider": "Netlify", "cname_suffixes": ["netlify.app", "netlify.com"], "claimable_when_dangling": false, "verification_status": "unverified",
+     "evidence_rules": [{"type": "http_text_contains", "value": "not found - request id", "signal": "unclaimed_resource"}]}
+  ]
+}

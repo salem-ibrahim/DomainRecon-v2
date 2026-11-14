@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "domainrecon.authorization_record.v1",
+  "title": "DomainRecon V2 Authorization Audit Record v1",
+  "description": "One immutable record per authorization decision. Typed acknowledgement text, credentials and secrets are never stored.",
+  "type": "object",
+  "required": ["schema_id", "schema_version", "record_id", "session_id", "run_id", "target", "operation", "authorization_method", "acknowledgement_id", "result", "authorized_at_utc", "details"],
+  "properties": {
+    "schema_id": {"const": "domainrecon.authorization_record"},
+    "schema_version": {"const": 1},
+    "record_id": {"type": "string"},
+    "session_id": {"type": "string"},
+    "run_id": {"type": ["string", "null"]},
+    "target": {"type": "string"},
+    "operation": {"type": "string", "pattern": "^[a-z0-9_]{1,48}$"},
+    "authorization_method": {"enum": ["interactive_typed_acknowledgement", "interactive_session_passive_acknowledgement", "command_line_acknowledgement"]},
+    "acknowledgement_id": {"type": ["string", "null"]},
+    "result": {"enum": ["granted", "denied"]},
+    "authorized_at_utc": {"type": "string", "format": "date-time"},
+    "operator_account": {"type": ["string", "null"]},
+    "details": {"type": "object"},
+    "recorded_before_run_directory_existed": {"type": "boolean"},
+    "note": {"type": "string"}
+  },
+  "additionalProperties": false
+}

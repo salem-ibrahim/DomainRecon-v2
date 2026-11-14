@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "domainrecon.database_inventory.v1",
+  "title": "DomainRecon Database Inventory v1",
+  "type": "object",
+  "required": ["schema_id", "schema_version", "module", "mode", "root_domain", "target", "source_artifact", "source_status", "generated_at", "inventory", "candidates", "errors"],
+  "properties": {
+    "schema_id": {"const": "domainrecon.database_inventory"},
+    "schema_version": {"const": 1},
+    "module": {"const": "database_discovery"},
+    "mode": {"const": "offline_nmap_analysis"},
+    "root_domain": {"type": "string"},
+    "target": {"type": "string"},
+    "source_artifact": {"type": "string"},
+    "source_status": {"enum": ["success", "partial"]},
+    "generated_at": {"type": "string"},
+    "inventory": {"type": "array", "items": {"$ref": "#/$defs/finding"}},
+    "candidates": {"type": "array", "items": {"$ref": "#/$defs/finding"}},
+    "errors": {"type": "array"}
+  },
+  "$defs": {
+    "cpe": {
+      "type": "object",
+      "required": ["original", "part", "vendor", "product", "version", "parse_status"],
+      "properties": {
+        "original": {"type": "string"},
+        "part": {"type": ["string", "null"]},
+        "vendor": {"type": ["string", "null"]},
+        "product": {"type": ["string", "null"]},
+        "version": {"type": ["string", "null"]},
+        "parse_status": {"enum": ["parsed", "unparsed"]}
+      }
+    },
+    "finding": {
+      "type": "object",
+      "required": ["identity", "hostname", "ip_address", "port", "transport", "nmap_service", "detected_at", "source", "evidence", "detection_method", "confidence", "assessment_status", "vulnerability_status"],
+      "properties": {
+        "finding_id": {"type": "string"},
+        "identity": {"enum": ["mysql", "mariadb", "postgresql", "mssql", "mongodb", "redis", "oracle", "unknown"]},
+        "product": {"type": ["string", "null"]},
+        "version": {"type": ["string", "null"]},
+        "hostname": {"type": ["string", "null"]},
+        "ip_address": {"type": ["string", "null"]},
+        "port": {"type": "integer", "minimum": 1, "maximum": 65535},
+        "transport": {"const": "tcp"},
+        "nmap_service": {"type": ["string", "null"]},
+        "detected_at": {"type": "string"},
+        "detection_method": {"type": "string"},
+        "confidence": {"enum": ["high", "medium", "low"]},
+        "assessment_status": {"const": "service_observed"},
+        "vulnerability_status": {"const": "not_assessed"},
+        "evidence": {"type": "object", "properties": {"nmap_cpes": {"type": "array", "items": {"$ref": "#/$defs/cpe"}}}},
+        "source": {"type": "object", "required": ["artifact", "schema_version", "scanner"]}
+      }
+    }
+  }
+}

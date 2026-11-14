@@ -1,0 +1,28 @@
+# DomainRecon V2 engagement configuration (strict YAML subset: mappings, "- " lists, [a, b] lists, scalars).
+# This file is CONFIGURATION, NOT PROOF OF AUTHORIZATION. It can only narrow scope, disable
+# operations and lower limits. Every active operation still requires its typed acknowledgement.
+engagement:
+  name: "External Security Assessment"
+  target: "example.com"
+  profile: standard            # passive | standard | full (defaults for the operations below)
+  client: "Example Corp"
+  authorization_reference: "SOW-2026-042"   # free-text reference to your signed authorization
+  scope:
+    domains:
+      - example.com            # must be the target or its subdomains (one root per engagement)
+    ip_ranges: []              # optional: when set, active targets must resolve inside these public CIDRs
+    excluded_assets:           # hostnames (and their subdomains) or IPs/CIDRs that must never be touched
+      - legacy.example.com
+  operations:
+    passive_recon: true
+    dns_assessment: true       # DNSx, apex/_dmarc/DKIM policy records, wildcard probe, DNSSEC query
+    http_assessment: true      # HTTPX (still requires "I AUTHORIZE ACTIVE PROBING")
+    tls_assessment: true       # pinned TLS handshakes (still requires "I AUTHORIZE TLS INSPECTION")
+    port_scanning: false       # Nmap (still requires "I AUTHORIZE PORT SCANNING")
+    # vulnerability_validation is deprecated: accepted only as false (older files); true is refused.
+  limits:
+    max_concurrency: 2         # capped at 4 (HTTPX additionally capped at 2)
+    requests_per_second: 2     # capped at 10 (HTTPX additionally capped at 2)
+  dns:
+    dkim_selectors: []         # e.g. [selector1, google]; selectors are never guessed
+    resolvers: []              # e.g. [9.9.9.9]; DNSSEC indicators are queried only when set

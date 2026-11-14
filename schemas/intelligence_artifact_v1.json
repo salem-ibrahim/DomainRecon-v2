@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "domainrecon.intelligence_artifact.v1",
+  "title": "DomainRecon V2 Intelligence Artifact v1",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "schema_version",
+    "project_version",
+    "target",
+    "run_id",
+    "stage",
+    "module",
+    "timestamp",
+    "status",
+    "source",
+    "evidence",
+    "findings"
+  ],
+  "properties": {
+    "schema_id": {"type": "string"},
+    "schema_version": {"const": 1},
+    "project_version": {"type": "string"},
+    "target": {"type": "string"},
+    "run_id": {"type": "string"},
+    "stage": {"type": "string"},
+    "module": {"type": "string"},
+    "timestamp": {"type": "string", "format": "date-time"},
+    "status": {"type": "string"},
+    "source": {},
+    "evidence": {"type": "array"},
+    "findings": {"type": "array"}
+  },
+  "additionalProperties": true
+}

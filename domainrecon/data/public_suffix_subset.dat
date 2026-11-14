@@ -1,0 +1,294 @@
+// DomainRecon V2 bundled public-suffix SUBSET (offline, Public Suffix List rule syntax).
+//
+// This file is a curated, conservative subset of https://publicsuffix.org/list/ (MPL-2.0).
+// It is NOT the complete list. DomainRecon combines it with a fail-closed heuristic
+// (generic second-level label + two-letter country-code TLD) so that common registry
+// suffixes such as co.uk or com.sa are rejected as root targets without any network access.
+//
+// To use the authoritative list instead, place an unmodified copy of the official
+// public_suffix_list.dat at domainrecon\data\public_suffix_list.dat, or point the
+// DOMAINRECON_PSL_FILE environment variable at it. When the full list is present the
+// heuristic is disabled and only the official rules apply. DomainRecon never downloads it.
+//
+// Syntax: one rule per line; "*." wildcard rules and "!" exception rules are supported.
+// IDN rules are stored in their ASCII (punycode) form.
+
+// ===BEGIN ICANN DOMAINS (subset)===
+// ae
+ac.ae
+co.ae
+gov.ae
+mil.ae
+net.ae
+org.ae
+sch.ae
+// ar
+com.ar
+edu.ar
+gob.ar
+net.ar
+org.ar
+// at
+ac.at
+co.at
+gv.at
+or.at
+// au
+asn.au
+com.au
+edu.au
+gov.au
+id.au
+net.au
+org.au
+// bd (wildcard)
+*.bd
+// bh
+com.bh
+edu.bh
+gov.bh
+net.bh
+org.bh
+// br
+art.br
+blog.br
+com.br
+edu.br
+gov.br
+net.br
+nom.br
+org.br
+// ck (wildcard with exception)
+*.ck
+!www.ck
+// cn
+ac.cn
+com.cn
+edu.cn
+gov.cn
+net.cn
+org.cn
+xn--55qx5d.cn
+xn--io0a7i.cn
+xn--od0alg.cn
+// co
+com.co
+edu.co
+gov.co
+net.co
+org.co
+// eg
+com.eg
+edu.eg
+eun.eg
+gov.eg
+mil.eg
+name.eg
+net.eg
+org.eg
+sci.eg
+// es
+com.es
+edu.es
+gob.es
+nom.es
+org.es
+// hk
+com.hk
+edu.hk
+gov.hk
+net.hk
+org.hk
+xn--55qx5d.hk
+xn--gmqw5a.hk
+xn--uc0atv.hk
+// id
+ac.id
+co.id
+go.id
+or.id
+// il
+ac.il
+co.il
+gov.il
+org.il
+// in
+ac.in
+co.in
+edu.in
+firm.in
+gen.in
+gov.in
+ind.in
+mil.in
+net.in
+org.in
+res.in
+// jo
+com.jo
+edu.jo
+gov.jo
+net.jo
+org.jo
+// jp
+ac.jp
+ad.jp
+co.jp
+ed.jp
+go.jp
+gr.jp
+lg.jp
+ne.jp
+or.jp
+// kh, mm, np (wildcards)
+*.kh
+*.mm
+*.np
+// kr
+ac.kr
+co.kr
+go.kr
+ne.kr
+or.kr
+re.kr
+// kw
+com.kw
+edu.kw
+gov.kw
+net.kw
+org.kw
+// lb
+com.lb
+edu.lb
+gov.lb
+net.lb
+org.lb
+// mx
+com.mx
+edu.mx
+gob.mx
+net.mx
+org.mx
+// my
+com.my
+edu.my
+gov.my
+net.my
+org.my
+// ng
+com.ng
+edu.ng
+gov.ng
+net.ng
+org.ng
+// nz
+ac.nz
+co.nz
+geek.nz
+gen.nz
+govt.nz
+kiwi.nz
+maori.nz
+net.nz
+org.nz
+school.nz
+// om
+com.om
+edu.om
+gov.om
+net.om
+org.om
+// pk
+com.pk
+edu.pk
+gov.pk
+net.pk
+org.pk
+// qa
+com.qa
+edu.qa
+gov.qa
+net.qa
+org.qa
+// sa
+com.sa
+edu.sa
+gov.sa
+med.sa
+net.sa
+org.sa
+pub.sa
+sch.sa
+// sg
+com.sg
+edu.sg
+gov.sg
+net.sg
+org.sg
+// th
+ac.th
+co.th
+go.th
+in.th
+or.th
+// tr
+com.tr
+edu.tr
+gov.tr
+net.tr
+org.tr
+// tw
+com.tw
+edu.tw
+gov.tw
+net.tw
+org.tw
+// uk
+ac.uk
+co.uk
+gov.uk
+ltd.uk
+me.uk
+net.uk
+nhs.uk
+org.uk
+plc.uk
+police.uk
+sch.uk
+// za
+ac.za
+co.za
+edu.za
+gov.za
+net.za
+org.za
+web.za
+// ===END ICANN DOMAINS===
+
+// ===BEGIN PRIVATE DOMAINS (subset)===
+appspot.com
+azurestaticapps.net
+azurewebsites.net
+blogspot.com
+cloudapp.net
+cloudfront.net
+duckdns.org
+elasticbeanstalk.com
+firebaseapp.com
+fly.dev
+github.io
+gitlab.io
+glitch.me
+herokuapp.com
+myshopify.com
+netlify.app
+ngrok.io
+onrender.com
+pages.dev
+readthedocs.io
+s3.amazonaws.com
+trafficmanager.net
+vercel.app
+web.app
+workers.dev
+// ===END PRIVATE DOMAINS===

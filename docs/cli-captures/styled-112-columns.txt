@@ -1,0 +1,611 @@
+
+ ____                        _       ____
+|  _ \  ___  _ __ ___   __ _(_)_ __ |  _ \ ___  ___ ___  _ __
+| | | |/ _ \| '_ ` _ \ / _` | | '_ \| |_) / _ \/ __/ _ \| '_ \ 
+| |_| | (_) | | | | | | (_| | | | | |  _ <  __/ (_| (_) | | | |
+|____/ \___/|_| |_| |_|\__,_|_|_| |_|_| \_\___|\___\___/|_| |_|
+  V2  v2.0.0  │  Authorized, scope-limited security assessment CLI
+
+── SESSION ─────────────────────────────────────────────────────────────────────────────────────────────────────
+ Engagement             none (root-domain scope only)    Passive authorization  not yet confirmed
+ Target                 (not selected)                   Active authorization   typed phrase per operation; n…
+ Scope validation       pending                          Last operation         none in this session
+ Session ID             251546685d47                     Findings               none recorded yet
+ Run ID                 not started                     
+── READINESS ───────────────────────────────────────────────────────────────────────────────────────────────────
+ HTTPX               not installed - HTTP probing disabled (run --check-httpx for details)
+ Public Suffix List  bundled offline subset (238 rules) - official list not installed
+ Subfinder           not installed: C:\DomainRecon\missing.exe
+ DNSx                available: C:\DomainRecon\dnsx.exe
+ Nmap                Nmap version 7.99 (fixture) (C:\DomainRecon\nmap.exe)
+ Modules             select a target to evaluate
+› Enter Target Domain (blank to exit): example.com
+
+── SESSION ─────────────────────────────────────────────────────────────────────────────────────────────────────
+ Engagement             none (root-domain scope only)    Passive authorization  not yet confirmed
+ Target                 example.com                      Active authorization   typed phrase per operation; n…
+ Scope validation       VALID                            Last operation         none in this session
+ Session ID             251546685d47                     Findings               none recorded yet
+ Run ID                 not started                     
+── READINESS ───────────────────────────────────────────────────────────────────────────────────────────────────
+ HTTPX               not installed - HTTP probing disabled (run --check-httpx for details)
+ Public Suffix List  bundled offline subset (238 rules) - official list not installed
+ Subfinder           not installed: C:\DomainRecon\missing.exe
+ DNSx                available: C:\DomainRecon\dnsx.exe
+ Nmap                Nmap version 7.99 (fixture) (C:\DomainRecon\nmap.exe)
+ Modules             15 ready, 12 waiting on prerequisites or dependencies
+
+── ENGAGEMENT ──────────────────────────────────────────────────────────────────────────────────────────────────
+ [15] Engagement Management                     ADMIN    ● READY  
+ [26] Scope Review & Target Check               ADMIN    ● READY  
+ [ 9] Change Target Domain                      ADMIN    ● READY  
+ [25] Session & Artifact Management             ADMIN    ● READY  
+
+── RECONNAISSANCE ──────────────────────────────────────────────────────────────────────────────────────────────
+ [ 1] Passive Subdomain Enumeration             PASSIVE  ● READY  
+ [ 2] DNS Resolution & Email Policy Records     PASSIVE  ○ NEEDS   passive collection required
+ [10] Offline Intelligence (DNS, HTTP, assets)  OFFLINE  ● READY  
+ [ 3] HTTP Services Discovery (HTTPX)           ACTIVE   ○ BLOCKED HTTPX binary missing; passive collection req…
+ [16] TLS & Certificate Intelligence            ACTIVE   ○ NEEDS   current-session DNS (active) or stored HTTPX…
+ [ 4] Nmap Port Scanning                        ACTIVE   ● READY  
+ [ 5] Database Service Discovery                OFFLINE  ○ NEEDS   successful Nmap result required
+
+── INTELLIGENCE ────────────────────────────────────────────────────────────────────────────────────────────────
+ [17] Technology Fingerprinting                 OFFLINE  ○ NEEDS   HTTPX, Nmap, or database evidence
+ [18] Cloud Infrastructure Intelligence         OFFLINE  ○ NEEDS   DNS or HTTPX evidence
+ [ 6] Vulnerability Intelligence (Stage 02)     OFFLINE  ○ NEEDS   a successful Nmap result and a local NVD JSO…
+ [19] Security Misconfiguration Assessment      OFFLINE  ○ NEEDS   HTTPX/Nmap evidence, or an evidence file to …
+ [20] Subdomain Takeover Intelligence           OFFLINE  ○ NEEDS   current-session DNS results
+ [14] Defensive Analysis (Stages 03-07)         OFFLINE  ● READY  
+ [21] Active Directory Assessment Imports       IMPORT   ● READY  
+
+── ANALYSIS ────────────────────────────────────────────────────────────────────────────────────────────────────
+ [22] Attack Path & Risk Correlation            OFFLINE  ○ NEEDS   at least one stage with findings
+ [23] MITRE ATT&CK Mapping                      OFFLINE  ○ NEEDS   findings (run analyses or correlation first)
+ [13] Historical Change Detection               OFFLINE  ● READY  
+ [11] Kill Chain Stage Implementation Status    ADMIN    ● READY  
+
+── REPORTING ───────────────────────────────────────────────────────────────────────────────────────────────────
+ [12] Unified Security Report (JSON/CSV/HTML)   OFFLINE  ● READY  
+ [24] Findings Lifecycle & Retesting            ADMIN    ○ NEEDS   sync needs a correlation result; listing/exp…
+ [ 8] View Previous Results                     ADMIN    ● READY  
+
+── WORKFLOWS ───────────────────────────────────────────────────────────────────────────────────────────────────
+ [27] Guided Pilot Workflow                     GUIDED   ● READY   every active stage needs its own confirmatio…
+ [ 7] Full Reconnaissance Workflow              GUIDED   ● READY   HTTPX/Nmap remain separately authorized
+ [ 0] Exit
+
+  PASSIVE = third-party/DNS lookups | ACTIVE = traffic to target hosts, separate typed acknowledgement | OFFLINE
+    = stored evidence only
+› Select an option: 1
+
+── PASSIVE SUBDOMAIN ENUMERATION ───────────────────────────────────────────────────────────────────────────────
+  [1] Subfinder - unavailable: binary missing
+  [2] crt.sh - available (requires internet access)
+  [3] Both - unavailable: Subfinder binary missing
+  [0] Back
+› Select a source: 2
+── PASSIVE OPERATION - AUTHORIZATION REQUIRED ──────────────────────────────────────────────────────────────────
+│ Operation : Passive subdomain enumeration  [PASSIVE]
+│ Target    : example.com
+│ Effect    : queries third-party sources (Subfinder providers, crt.sh); no traffic to the target
+│ Scope     : 0 excluded host(s), 0 excluded network(s); any validated public address of in-scope names
+│ Limits    : concurrency 2, 2 request(s)/s (defaults)
+│ Engagement: none
+│ Requires  : exact typed acknowledgement (the typed text is never stored); the decision is written to the audit
+│             trail
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+› Type exactly "I AM AUTHORIZED" to authorize passive collection: <typed acknowledgement>
+
+[passive] Collecting selected source(s); results are filtered to the validated target scope.
+• Querying passive source crt.sh ...
+  crt.sh: 4 names; complete
+✔ Passive results saved to:
+  C:\DomainRecon\results\example.com\20261112T220541Z\passive-01
+── DISCOVERED ASSETS (4) ───────────────────────────────────────────────────────────────────────────────────────
+ Hostname         │ Sources
+ ─────────────────┼────────
+ api.example.com  │ crtsh
+ old.example.com  │ crtsh
+ shop.example.com │ crtsh
+ vpn.example.com  │ crtsh
+Unique in-scope subdomains: 4
+
+── SESSION ─────────────────────────────────────────────────────────────────────────────────────────────────────
+ Engagement             none (root-domain scope only)    Passive authorization  confirmed for this session
+ Target                 example.com                      Active authorization   typed phrase per operation; n…
+ Scope validation       VALID                            Last operation         passive enumeration: success …
+ Session ID             251546685d47                     Findings               none recorded yet
+ Run ID                 20261112T220541Z                
+── READINESS ───────────────────────────────────────────────────────────────────────────────────────────────────
+ HTTPX               not installed - HTTP probing disabled (run --check-httpx for details)
+ Public Suffix List  bundled offline subset (238 rules) - official list not installed
+ Subfinder           not installed: C:\DomainRecon\missing.exe
+ DNSx                available: C:\DomainRecon\dnsx.exe
+ Nmap                Nmap version 7.99 (fixture) (C:\DomainRecon\nmap.exe)
+ Modules             16 ready, 11 waiting on prerequisites or dependencies
+
+── ENGAGEMENT ──────────────────────────────────────────────────────────────────────────────────────────────────
+ [15] Engagement Management                     ADMIN    ● READY  
+ [26] Scope Review & Target Check               ADMIN    ● READY  
+ [ 9] Change Target Domain                      ADMIN    ● READY  
+ [25] Session & Artifact Management             ADMIN    ● READY  
+
+── RECONNAISSANCE ──────────────────────────────────────────────────────────────────────────────────────────────
+ [ 1] Passive Subdomain Enumeration             PASSIVE  ● READY  
+ [ 2] DNS Resolution & Email Policy Records     PASSIVE  ● READY  
+ [10] Offline Intelligence (DNS, HTTP, assets)  OFFLINE  ● READY  
+ [ 3] HTTP Services Discovery (HTTPX)           ACTIVE   ○ BLOCKED HTTPX binary missing; current-session DNS re…
+ [16] TLS & Certificate Intelligence            ACTIVE   ○ NEEDS   current-session DNS (active) or stored HTTPX…
+ [ 4] Nmap Port Scanning                        ACTIVE   ● READY  
+ [ 5] Database Service Discovery                OFFLINE  ○ NEEDS   successful Nmap result required
+
+── INTELLIGENCE ────────────────────────────────────────────────────────────────────────────────────────────────
+ [17] Technology Fingerprinting                 OFFLINE  ○ NEEDS   HTTPX, Nmap, or database evidence
+ [18] Cloud Infrastructure Intelligence         OFFLINE  ○ NEEDS   DNS or HTTPX evidence
+ [ 6] Vulnerability Intelligence (Stage 02)     OFFLINE  ○ NEEDS   a successful Nmap result and a local NVD JSO…
+ [19] Security Misconfiguration Assessment      OFFLINE  ○ NEEDS   HTTPX/Nmap evidence, or an evidence file to …
+ [20] Subdomain Takeover Intelligence           OFFLINE  ○ NEEDS   current-session DNS results
+ [14] Defensive Analysis (Stages 03-07)         OFFLINE  ● READY  
+ [21] Active Directory Assessment Imports       IMPORT   ● READY  
+
+── ANALYSIS ────────────────────────────────────────────────────────────────────────────────────────────────────
+ [22] Attack Path & Risk Correlation            OFFLINE  ○ NEEDS   at least one stage with findings
+ [23] MITRE ATT&CK Mapping                      OFFLINE  ○ NEEDS   findings (run analyses or correlation first)
+ [13] Historical Change Detection               OFFLINE  ● READY  
+ [11] Kill Chain Stage Implementation Status    ADMIN    ● READY  
+
+── REPORTING ───────────────────────────────────────────────────────────────────────────────────────────────────
+ [12] Unified Security Report (JSON/CSV/HTML)   OFFLINE  ● READY  
+ [24] Findings Lifecycle & Retesting            ADMIN    ○ NEEDS   sync needs a correlation result; listing/exp…
+ [ 8] View Previous Results                     ADMIN    ● READY  
+
+── WORKFLOWS ───────────────────────────────────────────────────────────────────────────────────────────────────
+ [27] Guided Pilot Workflow                     GUIDED   ● READY   every active stage needs its own confirmatio…
+ [ 7] Full Reconnaissance Workflow              GUIDED   ● READY   HTTPX/Nmap remain separately authorized
+ [ 0] Exit
+
+  PASSIVE = third-party/DNS lookups | ACTIVE = traffic to target hosts, separate typed acknowledgement | OFFLINE
+    = stored evidence only
+› Select an option: 2
+
+[dns] Resolving session-discovered hostnames with DNSx.
+• Resolving 4 hostname(s) and policy records with DNSx ...
+✔ DNS results saved to:
+  C:\DomainRecon\results\example.com\20261112T220541Z\dns-01
+── DNS RECORDS (4) ─────────────────────────────────────────────────────────────────────────────────────────────
+ Hostname         │ DNS status │ A / AAAA                      │ CNAME chain           
+ ─────────────────┼────────────┼───────────────────────────────┼───────────────────────
+ api.example.com  │ success    │ 8.8.8.8, 2606:4700:4700::1111 │
+ old.example.com  │ success    │                               │ gone.azurewebsites.net
+ shop.example.com │ success    │ 23.227.38.65                  │ store.myshopify.com
+ vpn.example.com  │ unresolved │                               │
+✖ Resolved: 3 | unresolved: 1 | failed: 0
+
+── SESSION ─────────────────────────────────────────────────────────────────────────────────────────────────────
+ Engagement             none (root-domain scope only)    Passive authorization  confirmed for this session
+ Target                 example.com                      Active authorization   typed phrase per operation; n…
+ Scope validation       VALID                            Last operation         DNS resolution: completed (22…
+ Session ID             251546685d47                     Findings               none recorded yet
+ Run ID                 20261112T220541Z                
+── READINESS ───────────────────────────────────────────────────────────────────────────────────────────────────
+ HTTPX               not installed - HTTP probing disabled (run --check-httpx for details)
+ Public Suffix List  bundled offline subset (238 rules) - official list not installed
+ Subfinder           not installed: C:\DomainRecon\missing.exe
+ DNSx                available: C:\DomainRecon\dnsx.exe
+ Nmap                Nmap version 7.99 (fixture) (C:\DomainRecon\nmap.exe)
+ Modules             19 ready, 8 waiting on prerequisites or dependencies
+
+── ENGAGEMENT ──────────────────────────────────────────────────────────────────────────────────────────────────
+ [15] Engagement Management                     ADMIN    ● READY  
+ [26] Scope Review & Target Check               ADMIN    ● READY  
+ [ 9] Change Target Domain                      ADMIN    ● READY  
+ [25] Session & Artifact Management             ADMIN    ● READY  
+
+── RECONNAISSANCE ──────────────────────────────────────────────────────────────────────────────────────────────
+ [ 1] Passive Subdomain Enumeration             PASSIVE  ● READY  
+ [ 2] DNS Resolution & Email Policy Records     PASSIVE  ● READY  
+ [10] Offline Intelligence (DNS, HTTP, assets)  OFFLINE  ● READY  
+ [ 3] HTTP Services Discovery (HTTPX)           ACTIVE   ○ BLOCKED HTTPX binary missing
+ [16] TLS & Certificate Intelligence            ACTIVE   ● READY  
+ [ 4] Nmap Port Scanning                        ACTIVE   ● READY  
+ [ 5] Database Service Discovery                OFFLINE  ○ NEEDS   successful Nmap result required
+
+── INTELLIGENCE ────────────────────────────────────────────────────────────────────────────────────────────────
+ [17] Technology Fingerprinting                 OFFLINE  ○ NEEDS   HTTPX, Nmap, or database evidence
+ [18] Cloud Infrastructure Intelligence         OFFLINE  ● READY  
+ [ 6] Vulnerability Intelligence (Stage 02)     OFFLINE  ○ NEEDS   a successful Nmap result and a local NVD JSO…
+ [19] Security Misconfiguration Assessment      OFFLINE  ○ NEEDS   HTTPX/Nmap evidence, or an evidence file to …
+ [20] Subdomain Takeover Intelligence           OFFLINE  ● READY  
+ [14] Defensive Analysis (Stages 03-07)         OFFLINE  ● READY  
+ [21] Active Directory Assessment Imports       IMPORT   ● READY  
+
+── ANALYSIS ────────────────────────────────────────────────────────────────────────────────────────────────────
+ [22] Attack Path & Risk Correlation            OFFLINE  ○ NEEDS   at least one stage with findings
+ [23] MITRE ATT&CK Mapping                      OFFLINE  ○ NEEDS   findings (run analyses or correlation first)
+ [13] Historical Change Detection               OFFLINE  ● READY  
+ [11] Kill Chain Stage Implementation Status    ADMIN    ● READY  
+
+── REPORTING ───────────────────────────────────────────────────────────────────────────────────────────────────
+ [12] Unified Security Report (JSON/CSV/HTML)   OFFLINE  ● READY  
+ [24] Findings Lifecycle & Retesting            ADMIN    ○ NEEDS   sync needs a correlation result; listing/exp…
+ [ 8] View Previous Results                     ADMIN    ● READY  
+
+── WORKFLOWS ───────────────────────────────────────────────────────────────────────────────────────────────────
+ [27] Guided Pilot Workflow                     GUIDED   ● READY   every active stage needs its own confirmatio…
+ [ 7] Full Reconnaissance Workflow              GUIDED   ● READY   HTTPX/Nmap remain separately authorized
+ [ 0] Exit
+
+  PASSIVE = third-party/DNS lookups | ACTIVE = traffic to target hosts, separate typed acknowledgement | OFFLINE
+    = stored evidence only
+› Select an option: 4
+
+── NMAP PORT SCANNING ──────────────────────────────────────────────────────────────────────────────────────────
+  [1] Common TCP ports (top 100)
+  [2] Full TCP ports (1-65535)
+  [3] Custom TCP ports
+  [4] Resume Previous Scan
+  [5] Discovered in-scope hosts from current-session DNS (IPv4, optional IPv6) - available
+  [6] Root domain, dual-stack (IPv4 + public IPv6 answers, separate -6 invocation)
+  [0] Back
+› Select an Nmap operation: 1
+── ACTIVE OPERATION - AUTHORIZATION REQUIRED ───────────────────────────────────────────────────────────────────
+│ Operation : Nmap TCP connect scan  [ACTIVE]
+│ Target    : example.com
+│ Effect    : TCP connect scan of validated public addresses
+│ Scope     : 0 excluded host(s), 0 excluded network(s); any validated public address of in-scope names
+│ Limits    : concurrency 2, 2 request(s)/s (defaults)
+│ Engagement: none
+│ Requires  : exact typed acknowledgement (the typed text is never stored); the decision is written to the audit
+│             trail
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+› Type exactly "I AUTHORIZE PORT SCANNING" to authorize this TCP scan: wrong phrase
+! Nmap not authorized; no Nmap scan was started.
+
+── SESSION ─────────────────────────────────────────────────────────────────────────────────────────────────────
+ Engagement             none (root-domain scope only)    Passive authorization  confirmed for this session
+ Target                 example.com                      Active authorization   typed phrase per operation; n…
+ Scope validation       VALID                            Last operation         nmap_tcp_scan: not authorized…
+ Session ID             251546685d47                     Findings               none recorded yet
+ Run ID                 20261112T220541Z                
+── READINESS ───────────────────────────────────────────────────────────────────────────────────────────────────
+ HTTPX               not installed - HTTP probing disabled (run --check-httpx for details)
+ Public Suffix List  bundled offline subset (238 rules) - official list not installed
+ Subfinder           not installed: C:\DomainRecon\missing.exe
+ DNSx                available: C:\DomainRecon\dnsx.exe
+ Nmap                Nmap version 7.99 (fixture) (C:\DomainRecon\nmap.exe)
+ Modules             19 ready, 8 waiting on prerequisites or dependencies
+
+── ENGAGEMENT ──────────────────────────────────────────────────────────────────────────────────────────────────
+ [15] Engagement Management                     ADMIN    ● READY  
+ [26] Scope Review & Target Check               ADMIN    ● READY  
+ [ 9] Change Target Domain                      ADMIN    ● READY  
+ [25] Session & Artifact Management             ADMIN    ● READY  
+
+── RECONNAISSANCE ──────────────────────────────────────────────────────────────────────────────────────────────
+ [ 1] Passive Subdomain Enumeration             PASSIVE  ● READY  
+ [ 2] DNS Resolution & Email Policy Records     PASSIVE  ● READY  
+ [10] Offline Intelligence (DNS, HTTP, assets)  OFFLINE  ● READY  
+ [ 3] HTTP Services Discovery (HTTPX)           ACTIVE   ○ BLOCKED HTTPX binary missing
+ [16] TLS & Certificate Intelligence            ACTIVE   ● READY  
+ [ 4] Nmap Port Scanning                        ACTIVE   ● READY  
+ [ 5] Database Service Discovery                OFFLINE  ○ NEEDS   successful Nmap result required
+
+── INTELLIGENCE ────────────────────────────────────────────────────────────────────────────────────────────────
+ [17] Technology Fingerprinting                 OFFLINE  ○ NEEDS   HTTPX, Nmap, or database evidence
+ [18] Cloud Infrastructure Intelligence         OFFLINE  ● READY  
+ [ 6] Vulnerability Intelligence (Stage 02)     OFFLINE  ○ NEEDS   a successful Nmap result and a local NVD JSO…
+ [19] Security Misconfiguration Assessment      OFFLINE  ○ NEEDS   HTTPX/Nmap evidence, or an evidence file to …
+ [20] Subdomain Takeover Intelligence           OFFLINE  ● READY  
+ [14] Defensive Analysis (Stages 03-07)         OFFLINE  ● READY  
+ [21] Active Directory Assessment Imports       IMPORT   ● READY  
+
+── ANALYSIS ────────────────────────────────────────────────────────────────────────────────────────────────────
+ [22] Attack Path & Risk Correlation            OFFLINE  ○ NEEDS   at least one stage with findings
+ [23] MITRE ATT&CK Mapping                      OFFLINE  ○ NEEDS   findings (run analyses or correlation first)
+ [13] Historical Change Detection               OFFLINE  ● READY  
+ [11] Kill Chain Stage Implementation Status    ADMIN    ● READY  
+
+── REPORTING ───────────────────────────────────────────────────────────────────────────────────────────────────
+ [12] Unified Security Report (JSON/CSV/HTML)   OFFLINE  ● READY  
+ [24] Findings Lifecycle & Retesting            ADMIN    ○ NEEDS   sync needs a correlation result; listing/exp…
+ [ 8] View Previous Results                     ADMIN    ● READY  
+
+── WORKFLOWS ───────────────────────────────────────────────────────────────────────────────────────────────────
+ [27] Guided Pilot Workflow                     GUIDED   ● READY   every active stage needs its own confirmatio…
+ [ 7] Full Reconnaissance Workflow              GUIDED   ● READY   HTTPX/Nmap remain separately authorized
+ [ 0] Exit
+
+  PASSIVE = third-party/DNS lookups | ACTIVE = traffic to target hosts, separate typed acknowledgement | OFFLINE
+    = stored evidence only
+› Select an option: 20
+✔ DNS Intelligence saved to
+  C:\DomainRecon\results\example.com\20261112T220541Z\dns_intelligence-01;
+  host categories: {'DNS_RESOLVED_WITH_IP': 2, 'CNAME_ONLY': 1, 'DNS_NO_RECORD': 1}
+› Optional operator takeover-signature file (same JSON schema as domainrecon\data\takeover_signatures.json; blank = bundled only): 
+✔ Takeover intelligence saved to
+  C:\DomainRecon\results\example.com\20261112T220541Z\takeover-01;
+  classifications {'strong_indicator': 1, 'potentially_vulnerable': 0, 'informational': 1,
+  'insufficient_evidence': 0}. No resource was registered or claimed.
+── TAKEOVER INDICATORS (2) ─────────────────────────────────────────────────────────────────────────────────────
+ Severity │ Alias            │ Classification   │ Provider        │ Why                             │ Confidence
+ ─────────┼──────────────────┼──────────────────┼─────────────────┼─────────────────────────────────┼───────────
+ HIGH     │ old.example.com  │ strong indicator │ Microsoft Azure │ Alias points to a Microsoft Az… │ medium
+ INFO     │ shop.example.com │ informational    │ Shopify         │ Alias to an external service r… │ high
+• Indicators come from passive evidence and curated, unverified signatures; nothing was claimed or registered.
+
+── SESSION ─────────────────────────────────────────────────────────────────────────────────────────────────────
+ Engagement             none (root-domain scope only)    Passive authorization  confirmed for this session
+ Target                 example.com                      Active authorization   typed phrase per operation; n…
+ Scope validation       VALID                            Last operation         takeover: success (22:05:41 U…
+ Session ID             251546685d47                     Findings               HIGH 1  INFO 2  unrated 4  (7…
+ Run ID                 20261112T220541Z                
+── READINESS ───────────────────────────────────────────────────────────────────────────────────────────────────
+ HTTPX               not installed - HTTP probing disabled (run --check-httpx for details)
+ Public Suffix List  bundled offline subset (238 rules) - official list not installed
+ Subfinder           not installed: C:\DomainRecon\missing.exe
+ DNSx                available: C:\DomainRecon\dnsx.exe
+ Nmap                Nmap version 7.99 (fixture) (C:\DomainRecon\nmap.exe)
+ Modules             21 ready, 6 waiting on prerequisites or dependencies
+
+── ENGAGEMENT ──────────────────────────────────────────────────────────────────────────────────────────────────
+ [15] Engagement Management                     ADMIN    ● READY  
+ [26] Scope Review & Target Check               ADMIN    ● READY  
+ [ 9] Change Target Domain                      ADMIN    ● READY  
+ [25] Session & Artifact Management             ADMIN    ● READY  
+
+── RECONNAISSANCE ──────────────────────────────────────────────────────────────────────────────────────────────
+ [ 1] Passive Subdomain Enumeration             PASSIVE  ● READY  
+ [ 2] DNS Resolution & Email Policy Records     PASSIVE  ● READY  
+ [10] Offline Intelligence (DNS, HTTP, assets)  OFFLINE  ● READY  
+ [ 3] HTTP Services Discovery (HTTPX)           ACTIVE   ○ BLOCKED HTTPX binary missing
+ [16] TLS & Certificate Intelligence            ACTIVE   ● READY  
+ [ 4] Nmap Port Scanning                        ACTIVE   ● READY  
+ [ 5] Database Service Discovery                OFFLINE  ○ NEEDS   successful Nmap result required
+
+── INTELLIGENCE ────────────────────────────────────────────────────────────────────────────────────────────────
+ [17] Technology Fingerprinting                 OFFLINE  ○ NEEDS   HTTPX, Nmap, or database evidence
+ [18] Cloud Infrastructure Intelligence         OFFLINE  ● READY  
+ [ 6] Vulnerability Intelligence (Stage 02)     OFFLINE  ○ NEEDS   a successful Nmap result and a local NVD JSO…
+ [19] Security Misconfiguration Assessment      OFFLINE  ○ NEEDS   HTTPX/Nmap evidence, or an evidence file to …
+ [20] Subdomain Takeover Intelligence           OFFLINE  ● READY  
+ [14] Defensive Analysis (Stages 03-07)         OFFLINE  ● READY  
+ [21] Active Directory Assessment Imports       IMPORT   ● READY  
+
+── ANALYSIS ────────────────────────────────────────────────────────────────────────────────────────────────────
+ [22] Attack Path & Risk Correlation            OFFLINE  ● READY  
+ [23] MITRE ATT&CK Mapping                      OFFLINE  ● READY  
+ [13] Historical Change Detection               OFFLINE  ● READY  
+ [11] Kill Chain Stage Implementation Status    ADMIN    ● READY  
+
+── REPORTING ───────────────────────────────────────────────────────────────────────────────────────────────────
+ [12] Unified Security Report (JSON/CSV/HTML)   OFFLINE  ● READY  
+ [24] Findings Lifecycle & Retesting            ADMIN    ○ NEEDS   sync needs a correlation result; listing/exp…
+ [ 8] View Previous Results                     ADMIN    ● READY  
+
+── WORKFLOWS ───────────────────────────────────────────────────────────────────────────────────────────────────
+ [27] Guided Pilot Workflow                     GUIDED   ● READY   every active stage needs its own confirmatio…
+ [ 7] Full Reconnaissance Workflow              GUIDED   ● READY   HTTPX/Nmap remain separately authorized
+ [ 0] Exit
+
+  PASSIVE = third-party/DNS lookups | ACTIVE = traffic to target hosts, separate typed acknowledgement | OFFLINE
+    = stored evidence only
+› Select an option: 22
+✔ Risk correlation saved to
+  C:\DomainRecon\results\example.com\20261112T220541Z\correlation-01; 7
+  canonical finding(s) (0 duplicate(s) merged), priorities {'P2': 1, 'P4': 6}, 1 theoretical attack-path
+  hypothesis(es).
+── CORRELATED FINDINGS (7) ─────────────────────────────────────────────────────────────────────────────────────
+ Finding ID       │ Pri │ Severity │ Risk │ Asset            │ Finding           │ Confidence │ Stages          
+ ─────────────────┼─────┼──────────┼──────┼──────────────────┼───────────────────┼────────────┼─────────────────
+ DRF-8bc017b10f6e │ P2  │ HIGH     │ 4.48 │ old.example.com  │ subdomain_takeov… │ medium     │ takeover
+ DRF-95ca858095a5 │ P4  │ INFO     │ 0.4  │ shop.example.com │ subdomain_takeov… │ high       │ takeover
+ DRF-de7e4ccbd031 │ P4  │ INFO     │ 0.28 │ old.example.com  │ dangling_cname_i… │ medium     │ dns_intelligence
+ DRF-16d936f946cd │ P4  │ INFO     │ 0.16 │ unattributed     │ caa_observation   │ low        │ dns_intelligence
+ DRF-5d650b39c1f1 │ P4  │ INFO     │ 0.16 │ unattributed     │ dnssec_indicator  │ low        │ dns_intelligence
+ DRF-b04fd64fa721 │ P4  │ INFO     │ 0.16 │ unattributed     │ spf_observation   │ low        │ dns_intelligence
+ DRF-c429c1d57422 │ P4  │ INFO     │ 0.16 │ unattributed     │ dmarc_observation │ low        │ dns_intelligence
+── ATTACK-PATH HYPOTHESES (1) ──────────────────────────────────────────────────────────────────────────────────
+ Attack-path hypothesis                               │ Verification             │ ATT&CK           │ Confidence
+ ─────────────────────────────────────────────────────┼──────────────────────────┼──────────────────┼───────────
+ Subdomain takeover of old.example.com enabling phis… │ THEORETICAL - not tested │ T1584.001, T1566 │ low
+
+── SESSION ─────────────────────────────────────────────────────────────────────────────────────────────────────
+ Engagement             none (root-domain scope only)    Passive authorization  confirmed for this session
+ Target                 example.com                      Active authorization   typed phrase per operation; n…
+ Scope validation       VALID                            Last operation         correlation: success (22:05:4…
+ Session ID             251546685d47                     Findings               HIGH 1  INFO 6  (7 correlated)
+ Run ID                 20261112T220541Z                
+── READINESS ───────────────────────────────────────────────────────────────────────────────────────────────────
+ HTTPX               not installed - HTTP probing disabled (run --check-httpx for details)
+ Public Suffix List  bundled offline subset (238 rules) - official list not installed
+ Subfinder           not installed: C:\DomainRecon\missing.exe
+ DNSx                available: C:\DomainRecon\dnsx.exe
+ Nmap                Nmap version 7.99 (fixture) (C:\DomainRecon\nmap.exe)
+ Modules             22 ready, 5 waiting on prerequisites or dependencies
+
+── ENGAGEMENT ──────────────────────────────────────────────────────────────────────────────────────────────────
+ [15] Engagement Management                     ADMIN    ● READY  
+ [26] Scope Review & Target Check               ADMIN    ● READY  
+ [ 9] Change Target Domain                      ADMIN    ● READY  
+ [25] Session & Artifact Management             ADMIN    ● READY  
+
+── RECONNAISSANCE ──────────────────────────────────────────────────────────────────────────────────────────────
+ [ 1] Passive Subdomain Enumeration             PASSIVE  ● READY  
+ [ 2] DNS Resolution & Email Policy Records     PASSIVE  ● READY  
+ [10] Offline Intelligence (DNS, HTTP, assets)  OFFLINE  ● READY  
+ [ 3] HTTP Services Discovery (HTTPX)           ACTIVE   ○ BLOCKED HTTPX binary missing
+ [16] TLS & Certificate Intelligence            ACTIVE   ● READY  
+ [ 4] Nmap Port Scanning                        ACTIVE   ● READY  
+ [ 5] Database Service Discovery                OFFLINE  ○ NEEDS   successful Nmap result required
+
+── INTELLIGENCE ────────────────────────────────────────────────────────────────────────────────────────────────
+ [17] Technology Fingerprinting                 OFFLINE  ○ NEEDS   HTTPX, Nmap, or database evidence
+ [18] Cloud Infrastructure Intelligence         OFFLINE  ● READY  
+ [ 6] Vulnerability Intelligence (Stage 02)     OFFLINE  ○ NEEDS   a successful Nmap result and a local NVD JSO…
+ [19] Security Misconfiguration Assessment      OFFLINE  ○ NEEDS   HTTPX/Nmap evidence, or an evidence file to …
+ [20] Subdomain Takeover Intelligence           OFFLINE  ● READY  
+ [14] Defensive Analysis (Stages 03-07)         OFFLINE  ● READY  
+ [21] Active Directory Assessment Imports       IMPORT   ● READY  
+
+── ANALYSIS ────────────────────────────────────────────────────────────────────────────────────────────────────
+ [22] Attack Path & Risk Correlation            OFFLINE  ● READY  
+ [23] MITRE ATT&CK Mapping                      OFFLINE  ● READY  
+ [13] Historical Change Detection               OFFLINE  ● READY  
+ [11] Kill Chain Stage Implementation Status    ADMIN    ● READY  
+
+── REPORTING ───────────────────────────────────────────────────────────────────────────────────────────────────
+ [12] Unified Security Report (JSON/CSV/HTML)   OFFLINE  ● READY  
+ [24] Findings Lifecycle & Retesting            ADMIN    ● READY  
+ [ 8] View Previous Results                     ADMIN    ● READY  
+
+── WORKFLOWS ───────────────────────────────────────────────────────────────────────────────────────────────────
+ [27] Guided Pilot Workflow                     GUIDED   ● READY   every active stage needs its own confirmatio…
+ [ 7] Full Reconnaissance Workflow              GUIDED   ● READY   HTTPX/Nmap remain separately authorized
+ [ 0] Exit
+
+  PASSIVE = third-party/DNS lookups | ACTIVE = traffic to target hosts, separate typed acknowledgement | OFFLINE
+    = stored evidence only
+› Select an option: 23
+✔ ATT&CK matrix saved to
+  C:\DomainRecon\results\example.com\20261112T220541Z\mitre-01; 3
+  technique(s) across 3 tactic(s); 4 finding(s) without a mapping.
+── MITRE ATT&CK MAPPING (3) ────────────────────────────────────────────────────────────────────────────────────
+ Tactic               │ Technique │ Name                               │ Findings
+ ─────────────────────┼───────────┼────────────────────────────────────┼─────────
+ Initial Access       │ T1566     │ Phishing                           │ 2
+ Reconnaissance       │ T1590     │ Gather Victim Network Information  │ 1
+ Resource Development │ T1584.001 │ Compromise Infrastructure: Domains │ 2
+  Initial Access: T1566 (2)
+  Reconnaissance: T1590 (1)
+  Resource Development: T1584.001 (2)
+
+── SESSION ─────────────────────────────────────────────────────────────────────────────────────────────────────
+ Engagement             none (root-domain scope only)    Passive authorization  confirmed for this session
+ Target                 example.com                      Active authorization   typed phrase per operation; n…
+ Scope validation       VALID                            Last operation         mitre: success (22:05:41 UTC)
+ Session ID             251546685d47                     Findings               HIGH 1  INFO 6  (7 correlated)
+ Run ID                 20261112T220541Z                
+── READINESS ───────────────────────────────────────────────────────────────────────────────────────────────────
+ HTTPX               not installed - HTTP probing disabled (run --check-httpx for details)
+ Public Suffix List  bundled offline subset (238 rules) - official list not installed
+ Subfinder           not installed: C:\DomainRecon\missing.exe
+ DNSx                available: C:\DomainRecon\dnsx.exe
+ Nmap                Nmap version 7.99 (fixture) (C:\DomainRecon\nmap.exe)
+ Modules             22 ready, 5 waiting on prerequisites or dependencies
+
+── ENGAGEMENT ──────────────────────────────────────────────────────────────────────────────────────────────────
+ [15] Engagement Management                     ADMIN    ● READY  
+ [26] Scope Review & Target Check               ADMIN    ● READY  
+ [ 9] Change Target Domain                      ADMIN    ● READY  
+ [25] Session & Artifact Management             ADMIN    ● READY  
+
+── RECONNAISSANCE ──────────────────────────────────────────────────────────────────────────────────────────────
+ [ 1] Passive Subdomain Enumeration             PASSIVE  ● READY  
+ [ 2] DNS Resolution & Email Policy Records     PASSIVE  ● READY  
+ [10] Offline Intelligence (DNS, HTTP, assets)  OFFLINE  ● READY  
+ [ 3] HTTP Services Discovery (HTTPX)           ACTIVE   ○ BLOCKED HTTPX binary missing
+ [16] TLS & Certificate Intelligence            ACTIVE   ● READY  
+ [ 4] Nmap Port Scanning                        ACTIVE   ● READY  
+ [ 5] Database Service Discovery                OFFLINE  ○ NEEDS   successful Nmap result required
+
+── INTELLIGENCE ────────────────────────────────────────────────────────────────────────────────────────────────
+ [17] Technology Fingerprinting                 OFFLINE  ○ NEEDS   HTTPX, Nmap, or database evidence
+ [18] Cloud Infrastructure Intelligence         OFFLINE  ● READY  
+ [ 6] Vulnerability Intelligence (Stage 02)     OFFLINE  ○ NEEDS   a successful Nmap result and a local NVD JSO…
+ [19] Security Misconfiguration Assessment      OFFLINE  ○ NEEDS   HTTPX/Nmap evidence, or an evidence file to …
+ [20] Subdomain Takeover Intelligence           OFFLINE  ● READY  
+ [14] Defensive Analysis (Stages 03-07)         OFFLINE  ● READY  
+ [21] Active Directory Assessment Imports       IMPORT   ● READY  
+
+── ANALYSIS ────────────────────────────────────────────────────────────────────────────────────────────────────
+ [22] Attack Path & Risk Correlation            OFFLINE  ● READY  
+ [23] MITRE ATT&CK Mapping                      OFFLINE  ● READY  
+ [13] Historical Change Detection               OFFLINE  ● READY  
+ [11] Kill Chain Stage Implementation Status    ADMIN    ● READY  
+
+── REPORTING ───────────────────────────────────────────────────────────────────────────────────────────────────
+ [12] Unified Security Report (JSON/CSV/HTML)   OFFLINE  ● READY  
+ [24] Findings Lifecycle & Retesting            ADMIN    ● READY  
+ [ 8] View Previous Results                     ADMIN    ● READY  
+
+── WORKFLOWS ───────────────────────────────────────────────────────────────────────────────────────────────────
+ [27] Guided Pilot Workflow                     GUIDED   ● READY   every active stage needs its own confirmatio…
+ [ 7] Full Reconnaissance Workflow              GUIDED   ● READY   HTTPX/Nmap remain separately authorized
+ [ 0] Exit
+
+  PASSIVE = third-party/DNS lookups | ACTIVE = traffic to target hosts, separate typed acknowledgement | OFFLINE
+    = stored evidence only
+› Select an option: 26
+── SCOPE ───────────────────────────────────────────────────────────────────────────────────────────────────────
+ Root domain           example.com
+ Root validation       registrable domain per bundled offline subset (238 rules) - official list not installed
+ Excluded hostnames    none
+ Excluded networks     none
+ Authorized IP ranges  not restricted (any validated public address of in-scope names)
+ Always blocked        private, loopback, link-local, multicast, reserved, IPv4-mapped/6to4/Teredo addresses;
+                       names outside the root
+› Check a hostname or IP against the scope (blank to go back): legacy.example.com
+IN SCOPE: legacy.example.com is within example.com and not excluded.
+› Check a hostname or IP against the scope (blank to go back): 10.0.0.5
+✖ OUT OF SCOPE - scope violation: Non-public destination is blocked: 10.0.0.5
+› Check a hostname or IP against the scope (blank to go back): 
+
+── SESSION ─────────────────────────────────────────────────────────────────────────────────────────────────────
+ Engagement             none (root-domain scope only)    Passive authorization  confirmed for this session
+ Target                 example.com                      Active authorization   typed phrase per operation; n…
+ Scope validation       VALID                            Last operation         mitre: success (22:05:41 UTC)
+ Session ID             251546685d47                     Findings               HIGH 1  INFO 6  (7 correlated)
+ Run ID                 20261112T220541Z                
+── READINESS ───────────────────────────────────────────────────────────────────────────────────────────────────
+ HTTPX               not installed - HTTP probing disabled (run --check-httpx for details)
+ Public Suffix List  bundled offline subset (238 rules) - official list not installed
+ Subfinder           not installed: C:\DomainRecon\missing.exe
+ DNSx                available: C:\DomainRecon\dnsx.exe
+ Nmap                Nmap version 7.99 (fixture) (C:\DomainRecon\nmap.exe)
+ Modules             22 ready, 5 waiting on prerequisites or dependencies
+
+── ENGAGEMENT ──────────────────────────────────────────────────────────────────────────────────────────────────
+ [15] Engagement Management                     ADMIN    ● READY  
+ [26] Scope Review & Target Check               ADMIN    ● READY  
+ [ 9] Change Target Domain                      ADMIN    ● READY  
+ [25] Session & Artifact Management             ADMIN    ● READY  
+
+── RECONNAISSANCE ──────────────────────────────────────────────────────────────────────────────────────────────
+ [ 1] Passive Subdomain Enumeration             PASSIVE  ● READY  
+ [ 2] DNS Resolution & Email Policy Records     PASSIVE  ● READY  
+ [10] Offline Intelligence (DNS, HTTP, assets)  OFFLINE  ● READY  
+ [ 3] HTTP Services Discovery (HTTPX)           ACTIVE   ○ BLOCKED HTTPX binary missing
+ [16] TLS & Certificate Intelligence            ACTIVE   ● READY  
+ [ 4] Nmap Port Scanning                        ACTIVE   ● READY  
+ [ 5] Database Service Discovery                OFFLINE  ○ NEEDS   successful Nmap result required
+
+── INTELLIGENCE ────────────────────────────────────────────────────────────────────────────────────────────────
+ [17] Technology Fingerprinting                 OFFLINE  ○ NEEDS   HTTPX, Nmap, or database evidence
+ [18] Cloud Infrastructure Intelligence         OFFLINE  ● READY  
+ [ 6] Vulnerability Intelligence (Stage 02)     OFFLINE  ○ NEEDS   a successful Nmap result and a local NVD JSO…
+ [19] Security Misconfiguration Assessment      OFFLINE  ○ NEEDS   HTTPX/Nmap evidence, or an evidence file to …
+ [20] Subdomain Takeover Intelligence           OFFLINE  ● READY  
+ [14] Defensive Analysis (Stages 03-07)         OFFLINE  ● READY  
+ [21] Active Directory Assessment Imports       IMPORT   ● READY  
+
+── ANALYSIS ────────────────────────────────────────────────────────────────────────────────────────────────────
+ [22] Attack Path & Risk Correlation            OFFLINE  ● READY  
+ [23] MITRE ATT&CK Mapping                      OFFLINE  ● READY  
+ [13] Historical Change Detection               OFFLINE  ● READY  
+ [11] Kill Chain Stage Implementation Status    ADMIN    ● READY  
+
+── REPORTING ───────────────────────────────────────────────────────────────────────────────────────────────────
+ [12] Unified Security Report (JSON/CSV/HTML)   OFFLINE  ● READY  
+ [24] Findings Lifecycle & Retesting            ADMIN    ● READY  
+ [ 8] View Previous Results                     ADMIN    ● READY  
+
+── WORKFLOWS ───────────────────────────────────────────────────────────────────────────────────────────────────
+ [27] Guided Pilot Workflow                     GUIDED   ● READY   every active stage needs its own confirmatio…
+ [ 7] Full Reconnaissance Workflow              GUIDED   ● READY   HTTPX/Nmap remain separately authorized
+ [ 0] Exit
+
+  PASSIVE = third-party/DNS lookups | ACTIVE = traffic to target hosts, separate typed acknowledgement | OFFLINE
+    = stored evidence only
+› Select an option: 0
+DomainRecon V2 session ended.
